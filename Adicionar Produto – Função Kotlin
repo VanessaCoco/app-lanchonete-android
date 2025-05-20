@@ -1,0 +1,10 @@
+fun adicionarProduto(context: Context, produto: Produto) {
+    val db = DBHelper(context).writableDatabase
+    val values = ContentValues().apply {
+        put("nome", produto.nome)
+        put("preco", produto.preco)
+        put("quantidadeEstoque", produto.quantidadeEstoque)
+    }
+    db.insert("Produto", null, values)
+    db.close()
+}
