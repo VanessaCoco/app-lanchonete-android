@@ -1,0 +1,20 @@
+fun obterRelatorioVendas(context: Context): List<Venda> {
+    val db = DBHelper(context).readableDatabase
+    val cursor = db.rawQuery("SELECT * FROM Venda", null)
+    val lista = mutableListOf<Venda>()
+    if (cursor.moveToFirst()) {
+        do {
+            lista.add(
+                Venda(
+                    id = cursor.getInt(0),
+                    produtoId = cursor.getInt(1),
+                    quantidadeVendida = cursor.getInt(2),
+                    data = cursor.getString(3)
+                )
+            )
+        } while (cursor.moveToNext())
+    }
+    cursor.close()
+    db.close()
+    return lista
+}
