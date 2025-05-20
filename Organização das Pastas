@@ -1,0 +1,9 @@
+app/
+├── data/
+│   ├── Produto.kt
+│   ├── Venda.kt
+│   └── DBHelper.kt
+├── utils/
+│   ├── adicionarProduto.kt
+│   ├── registrarVenda.kt
+│   └── obterRelatorioVendas.kt
