@@ -1,0 +1,16 @@
+fun registrarVenda(context: Context, venda: Venda) {
+    val db = DBHelper(context).writableDatabase
+    val values = ContentValues().apply {
+        put("produtoId", venda.produtoId)
+        put("quantidadeVendida", venda.quantidadeVendida)
+        put("data", venda.data)
+    }
+    db.insert("Venda", null, values)
+
+    // Atualizar estoque
+    db.execSQL(
+        "UPDATE Produto SET quantidadeEstoque = quantidadeEstoque - ? WHERE id = ?",
+        arrayOf(venda.quantidadeVendida, venda.produtoId)
+    )
+    db.close()
+}
